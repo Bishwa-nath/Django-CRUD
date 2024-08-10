@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block content %}
+{% if user.is_authenticated %}
+    <h1>Customers</h1> <br>
+    
+        <table class="table border table-hover">
+            <thead class="table-secondary">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if records %}
+                    {% for rec in records %}
+                        <tr>
+                            <td>{{rec.id}}</td>
+                            <td>{{rec.first_name}}</td>
+                            <td>{{rec.last_name}}</td>
+                            <td>{{rec.phone}}</td>
+                            <td>{{rec.email}}</td>
+                            <td>{{rec.street}}</td>
+                            <td>{{rec.city}}</td>
+                            <td>{{rec.state}}</td>
+                            <td>{{rec.zip_code}}</td>
+                            <td><a href={% url 'customer' rec.id %} class="btn btn-primary">View</a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+{% else %} 
+    <div class="col-md-6 offset-md-3 card shadow p-4">
+        <h1>Login</h1>
+        <hr />
+        <form action="{% url 'home' %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    placeholder="Username"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Password"
+                    required
+                />
+            </div>
+            
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-secondary">Login</button>
+                <p class="text-center">Don't have account? <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{% url 'register' %}">Register</a></p>
+            </div>
+        </form>
+    </div>
+{% endif %}
+{% endblock content %}

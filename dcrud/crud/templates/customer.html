@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Customer: </h1>
+
+<div class="col-md-6 offset-md-3 card p-4">
+    <div class=card-head>
+        <h4 class="card-title">{{customer.first_name}} {{customer.last_name}}</h4>
+    </div>
+    <div class="card-body">
+        <p><b>Name:</b> {{customer.first_name}} {{customer.last_name}}</p>
+        <p><b>Phone:</b> {{customer.phone}}</p>
+        <p><b>Email:</b> {{customer.email}}</p>
+        <p><b>Street:</b> {{customer.street}}</p>
+        <p><b>City:</b> {{customer.city}}</p>
+        <p><b>State:</b> {{customer.state}}</p>
+        <p><b>Zip:</b> {{customer.zip_code}}</p>
+        <hr>
+        <div >
+            <a class="card-link btn btn-secondary" href="{% url 'home' %}">Back</a>
+            <a class="card-link btn btn-primary" href="{% url 'update_customer' customer.id %}">Update</a>
+            <a class="card-link btn btn-danger" href="{% url 'delete_customer' customer.id %}">Delete</a>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content %}

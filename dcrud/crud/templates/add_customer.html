@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if customer and customer.id %}
+<h1>Update customer</h1>
+{% else %}
+<h1>Add customer</h1>
+{% endif %}
+
+
+<div class="col-md-6 offset-md-3 card p-4">
+    <form method="POST" action="{% url 'add_customer' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button type="submit" class="btn btn-success">
+                {% if customer and customer.id %}
+                    Update
+                {% else %}
+                    Add
+                {% endif %}
+                </button>
+            <a class="card-link btn btn-secondary" href="{% url 'home' %}">Back</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
